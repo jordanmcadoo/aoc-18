@@ -1,10 +1,18 @@
 
-func calculateChecksum(input: String) -> [Int] {
+func calculateChecksum(input: String) -> Int {
     let arr = createArray(input: input)
+    var twoCount = 0
+    var threeCount = 0
     arr.forEach { line in
-        checkIfTwoOrThree(line)
+        let result = checkIfTwoOrThree(line)
+        if result.0 {
+            twoCount += 1
+        }
+        if result.1 {
+            threeCount += 1
+        }
     }
-    return [0,0]
+    return twoCount * threeCount
 }
 
 func createArray(input: String) -> [String] {
@@ -52,7 +60,7 @@ abcdee
 ababab
 """
 
-//calculateChecksum(input: testInput) == [4, 3]
+calculateChecksum(input: testInput) == 12
 
 createArray(input: testInput) == ["abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab"]
 
